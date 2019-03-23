@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   resources :users
+  resources :projects
 
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'

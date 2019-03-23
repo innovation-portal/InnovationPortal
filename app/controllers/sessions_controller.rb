@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
      @user = User.find_or_create_by_omniauth(auth_hash)
      session[:user_id] = @user.id
     #  redirect_to user_path(@user)
-    redirect_to listings_path
+    redirect_to projects_path
     else
       # normal login with user email and password
       @user = User.find_by(email: params[:user][:email])
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
         redirect_to listings_path
       else
         flash[:message] = "Oops! Something went wrong."
-        redirect_to login_path
+        redirect_to projects_path
       end
     end
   end
