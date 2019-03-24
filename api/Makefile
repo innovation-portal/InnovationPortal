@@ -7,7 +7,7 @@
     GOGET=$(GOCMD) get
     BINARY=hackhub
     ORG=thatotherguydev
-    VERSION=0.0.2
+    VERSION=0.0.7
     DOCKER_PROD_TAG=$(ORG)/$(BINARY):$(VERSION)
     DOCKER_LATEST_TAG=$(ORG)/$(BINARY):latest
 
