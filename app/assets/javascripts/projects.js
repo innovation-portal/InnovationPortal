@@ -1,6 +1,6 @@
 $(function() {
   getProjects();
-  console.log("test");
+  $("#example").DataTable();
 });
 
 const getProjects = () => {
