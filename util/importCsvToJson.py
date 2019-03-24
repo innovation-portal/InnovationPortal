@@ -15,46 +15,51 @@ import json
 import sys
 import re
 
-import_filename='C:\\Users\\Owner\\Downloads\\HabHack.csv'
-import_filename='C:\\Users\\Owner\\Downloads\\TableView_1800.csv'
-import_filename='C:\\Users\\Owner\\Downloads\\Table_1805.csv'
-import_filename='C:\\Users\\Owner\\Downloads\\Table_18052.csv'
-#import_filename='C:\\Users\\Owner\\Downloads\\HabHack.csv'
+default_import_filename='HackPortal.csv'
+default_url="http://104.197.161.63:8080/v1/api/projects"
+import_filename=default_import_filename
 
-airfields=['Name', 'HackathonProgram', 'Sector', 'MonthYear', 'WinnerType', 'Type', 'Names', 'Descriptions']
+# airfields left here to help with maintaining mapping to clumn names in airtable spreadsheet fields
+# airfields=['Name', 'HackathonProgram', 'Sector', 'MonthYear', 'WinnerType', 'Type', 'Names', 'Descriptions']
 mongofields=['Name', 'Hackathon', 'ApplicationArea', 'Year',  'Tags', 'Members', 'Description','WinnerType','Twitter']
 arrayFields=['ApplicationArea', 'Tags', 'Members']
+
 fields=mongofields
-debug=True
+debug=False # True
+
 def getJsonArray():
     payload_items=[]
-    with open(import_filename, encoding='utf-8') as csvfile:
-        readCsv =csv.reader(csvfile,delimiter=',')
-        cnt=0
-        for row in readCsv:
-            idx=0
-            payload={}
-            for utfitem in row:
-                item=re.sub(r'[^\x00-\x7f]',r'', utfitem)
-                # handle case if new fields added to CSV
-                if idx >= len(fields):
-                    continue
-                if 'Year' in fields[idx]:
-                    # Year is a special case - parse and ensure its an int
-                    intitem=handleYearCase(item)
-                    payload[fields[idx]] = intitem
-                elif fields[idx] in arrayFields:
-                    item_array=[]
-                    if item:
-                        item_array=item.split(sep=",")
-                    payload[fields[idx]] = item_array
-                else:
-                    payload[fields[idx]] = item
-                idx+=1
-            cnt+=1
-            payload_items.append(payload)
-        if debug:
-            print ("Rows: %d"%(cnt-1))
+    try:
+        with open(import_filename, encoding='utf-8') as csvfile:
+            readCsv =csv.reader(csvfile,delimiter=',')
+            cnt=0
+            for row in readCsv:
+                idx=0
+                payload={}
+                for utfitem in row:
+                    item=re.sub(r'[^\x00-\x7f]',r'', utfitem)
+                    # handle case if new fields added to CSV
+                    if idx >= len(fields):
+                        continue
+                    if 'Year' in fields[idx]:
+                        # Year is a special case - parse and ensure its an int
+                        intitem=handleYearCase(item)
+                        payload[fields[idx]] = intitem
+                    elif fields[idx] in arrayFields:
+                        item_array=[]
+                        if item:
+                            item_array=item.split(sep=",")
+                        payload[fields[idx]] = item_array
+                    else:
+                        payload[fields[idx]] = item
+                    idx+=1
+                cnt+=1
+                payload_items.append(payload)
+    except FileNotFoundError:
+        print ("Exiting with Error: File not found.  Expected file: %s"%(import_filename))
+        sys.exit()
+    if debug:
+       print ("Rows: %d"%(cnt-1))
     return payload_items
 
 def handleYearCase(item):
@@ -122,7 +127,6 @@ def showJsonArray():
         return payload_items
     
 
-default_url="http://104.197.161.63:8080/v1/api/projects"
        
 def sendJsonPost(payload):
     myheaders = {'content-type': 'application/json'}
@@ -156,11 +160,17 @@ def postItems(url):
         idx+=1
     
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Usage:  importCsvToJson <UrlToPostJson>")  
-        print("Usage:  importCsvToJson default -- to use default Url %s"%(default_url))
+    if len(sys.argv) < 3:
+        print("Usage:  importCsvToJson <FileToLoad> <UrlToPostJson>")  
+        print("Usage:  use default to replace either or both parameters")
+        print("Usage:  importCsvToJson default default -- to use defaults for both")
         sys.exit()
-    url = sys.argv[1]
+    import_filename = sys.argv[1]
+    if ("default" == import_filename):
+        import_filename=default_import_filename
+        print ("Using default import file [%s]"%(default_import_filename))
+
+    url = sys.argv[2]
     if ("default" == url):
         url=default_url
         print ("Using default url [%s]"%(default_url))
