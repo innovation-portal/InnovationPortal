@@ -1,5 +1,6 @@
 $(function() {
   getProjects();
+  createProject();
   $("#example").DataTable();
 });
 
@@ -40,6 +41,7 @@ class Project {
 }
 
 Project.prototype.projectHTML = function() {
+  console.log(this.Year);
   return `
     <tr>
     <td>${this.Name}</td>
@@ -51,6 +53,18 @@ Project.prototype.projectHTML = function() {
     <td>${this.WinnerType}</td>
     <td>${this.Hackathon}</td>
     <td>${this.Year}</td>
+
     </tr>
   `;
+};
+
+const createProject = () => {
+  $(".new_project").submit(function(e) {
+    e.preventDefault();
+    let values = $(this).serialize();
+    let newProject = $.post(
+      "https://api.hackportal.net/v1/api/projects",
+      values
+    );
+  });
 };
