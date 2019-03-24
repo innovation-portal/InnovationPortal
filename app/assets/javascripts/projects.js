@@ -1,5 +1,6 @@
 $(function() {
   getProjects();
+  createProject();
   $("#example").DataTable();
 });
 
@@ -53,4 +54,15 @@ Project.prototype.projectHTML = function() {
     <td>${this.Year}</td>
     </tr>
   `;
+};
+
+const createProject = () => {
+  $(".new_project").submit(function(e) {
+    e.preventDefault();
+    let values = $(this).serialize();
+    let newProject = $.post(
+      "https://api.hackportal.net/v1/api/projects",
+      values
+    );
+  });
 };
