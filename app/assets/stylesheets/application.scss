@@ -27,8 +27,18 @@ body {
 .display-4,
 .lead {
   text-align: center;
+  color: #e7252e;
+  text-transform: uppercase;
+  font-weight: normal;
+  line-height: 1.3;
+  text-shadow: 0 1px 1px rgba(0,0,0,.5);
+  margin: 12px 0 0;
 }
 
 #enter {
   text-align: center;
+}
+.jumbotron{
+  border: solid #e7252e 5px;
+  background-color: white;
 }
