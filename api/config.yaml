@@ -1,0 +1,2 @@
+server:
+  JWTKey: "some-signing-key"
