@@ -31,6 +31,7 @@ import (
 type Project struct {
 	ID              string   `bson:"_id,omitempty"`
 	Name            string   `bson:"name"`
+	Description     string   `bson:"description"`
 	Tags            []string `bson:"tags"`
 	TagLine         string   `bson:"tag_line"`
 	Members         []string `bson:"members"`
@@ -92,6 +93,7 @@ func Routes(logger *log.Logger, config *config.Configuration, tokenAuth *jwtauth
 	router.Get("/", handler.GetProjects)
 	router.Post("/", handler.PostProject)
 	router.Get("/{ProjectID}", handler.GetProject)
+	router.Put("/{ProjectID}", handler.UpdateProject)
 	router.Delete("/{ProjectID}", handler.DeleteProject)
 
 	return handler
@@ -167,7 +169,6 @@ func (h *Handler) GetProject(w http.ResponseWriter, r *http.Request) {
 // GetProjects retrieves a list of projects
 func (h *Handler) GetProjects(w http.ResponseWriter, r *http.Request) {
 	opts := options.Find()
-	opts.SetLimit(10)
 	var projects []Project
 	cur, err := h.Collection.Find(context.TODO(), bson.D{{}}, opts)
 	if err != nil {
