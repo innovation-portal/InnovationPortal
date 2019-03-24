@@ -9,17 +9,17 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new
-    @project = Project.new
-  end
+  # def new
+  #   @project = Project.new
+  # end
 
-  def create
-    @project = Project.new
+  # def create
+  #   @project = Project.new
 
-    if @project.save
-      render json: @project, status: 201
-    end
-  end
+  #   if @project.save
+  #     render json: @project, status: 201
+  #   end
+  # end
 
 end
 

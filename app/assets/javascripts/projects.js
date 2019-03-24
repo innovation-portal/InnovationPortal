@@ -1,6 +1,6 @@
 $(function() {
   getProjects();
-  createProject();
+  // createProject();
   $("#example").DataTable();
 });
 
@@ -58,13 +58,13 @@ Project.prototype.projectHTML = function() {
   `;
 };
 
-const createProject = () => {
-  $(".new_project").submit(function(e) {
-    e.preventDefault();
-    let values = $(this).serialize();
-    let newProject = $.post(
-      "https://api.hackportal.net/v1/api/projects",
-      values
-    );
-  });
-};
+// const createProject = () => {
+//   $(".new_project").submit(function(e) {
+//     e.preventDefault();
+//     let values = $(this).serialize();
+//     let newProject = $.post(
+//       "https://api.hackportal.net/v1/api/projects",
+//       values
+//     );
+//   });
+// };
