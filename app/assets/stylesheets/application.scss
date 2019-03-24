@@ -12,3 +12,23 @@
  *
  */
 @import "bootstrap";
+
+body {
+  background-color: #d32f2f;
+}
+
+.wrapper {
+  background-color: #fcfcfc;
+  margin: 16px auto;
+  padding: 2.25%;
+  width: 85%;
+}
+
+.display-4,
+.lead {
+  text-align: center;
+}
+
+#enter {
+  text-align: center;
+}
