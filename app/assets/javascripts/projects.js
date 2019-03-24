@@ -41,6 +41,7 @@ class Project {
 }
 
 Project.prototype.projectHTML = function() {
+  console.log(this.Year);
   return `
     <tr>
     <td>${this.Name}</td>
@@ -52,6 +53,7 @@ Project.prototype.projectHTML = function() {
     <td>${this.WinnerType}</td>
     <td>${this.Hackathon}</td>
     <td>${this.Year}</td>
+
     </tr>
   `;
 };
