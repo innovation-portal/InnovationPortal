@@ -32,7 +32,7 @@
 	$(GOBUILD) -o $(BINARY) -v main.go
 	./$(BINARY)
     deps:
-	dep ensure
+	dep ensure -v
 
     # Cross compilation
     build-linux:

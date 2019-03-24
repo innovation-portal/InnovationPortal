@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth"
 	"github.com/go-chi/render"
 	"github.com/hackathon/hackhub/features/health"
@@ -29,7 +30,16 @@ var (
 func Routes(logger *log.Logger, config *config.Configuration, db database.DB) *chi.Mux {
 	tokenAuth := jwtauth.New("HS256", []byte(config.Server.JWTKey), nil)
 	router := chi.NewRouter()
+	cors := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300, // Maximum value not ignored by any of major browsers
+	})
 	router.Use(
+		cors.Handler,
 		render.SetContentType(render.ContentTypeJSON),
 		logs.NewStructuredLogger(logger),
 		middleware.DefaultCompress,

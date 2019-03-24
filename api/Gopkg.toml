@@ -24,6 +24,11 @@
 #   go-tests = true
 #   unused-packages = true
 
+ignored = [
+  "github.com/hackathon/HackPortal", 
+  "github.com/hackathon/hackhub/features/*",
+  "github.com/hackathon/hackhub/pkg/*",
+]
 
 [[constraint]]
   name = "github.com/go-chi/chi"

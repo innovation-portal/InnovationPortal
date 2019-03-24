@@ -37,6 +37,14 @@
   version = "v4.0.1"
 
 [[projects]]
+  digest = "1:dfa416a1bb8139f30832543340f972f65c0db9932034cb6a1b42c5ac615a3fb8"
+  name = "github.com/go-chi/cors"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "dba6525398619dead495962a916728e7ee2ca322"
+  version = "v1.0.0"
+
+[[projects]]
   digest = "1:866bac66ae32f6d18b0ccd9b0322de28846e5c1ae9bc889f3e590438a3486ae6"
   name = "github.com/go-chi/jwtauth"
   packages = ["."]
@@ -75,14 +83,6 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
-
-[[projects]]
-  digest = "1:236d7e1bdb50d8f68559af37dbcf9d142d56b431c9b2176d41e2a009b664cda8"
-  name = "github.com/google/uuid"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "9b3b1e0f5f99ae461456d768e7d301a7acdaa2d8"
-  version = "v1.1.0"
 
 [[projects]]
   digest = "1:c0d19ab64b32ce9fe5cf4ddceba78d5bc9807f0016db6b1183599da3dcc24d10"
@@ -350,25 +350,6 @@
   version = "v0.3.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:9fdc2b55e8e0fafe4b41884091e51e77344f7dc511c5acedcfd98200003bff90"
-  name = "golang.org/x/time"
-  packages = ["rate"]
-  pruneopts = "UT"
-  revision = "85acf8d2951cb2a3bde7632f9ff273ef0379bcbd"
-
-[[projects]]
-  branch = "master"
-  digest = "1:aaf439d609ed4c1d0309b5d20e3b2acad9f64a4eddd76b87721857a8c92ec45d"
-  name = "googlemaps.github.io/maps"
-  packages = [
-    ".",
-    "internal",
-  ]
-  pruneopts = "UT"
-  revision = "be134e760d707b2057d6a68668e19c509147d805"
-
-[[projects]]
   digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
@@ -383,6 +364,7 @@
     "github.com/dgrijalva/jwt-go",
     "github.com/go-chi/chi",
     "github.com/go-chi/chi/middleware",
+    "github.com/go-chi/cors",
     "github.com/go-chi/jwtauth",
     "github.com/go-chi/render",
     "github.com/mongodb/mongo-go-driver/bson",
@@ -395,7 +377,6 @@
     "github.com/sirupsen/logrus",
     "github.com/spf13/viper",
     "golang.org/x/crypto/bcrypt",
-    "googlemaps.github.io/maps",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
