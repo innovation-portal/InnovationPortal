@@ -39,7 +39,7 @@ gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'dotenv-rails'
-gem 'bootstrap', '~> 4.0.0'
+gem "bootstrap", ">= 4.3.1"
 gem 'jquery-rails'
 
 
